@@ -1,1 +1,25 @@
 
+
+  body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 16px; background: #f5f5f5; }
+  h1 { background: #B5181B; color: white; padding: 14px 20px; border-radius: 8px; }
+  h2 { color: #B5181B; border-bottom: 2px solid #B5181B; padding-bottom: 4px; }
+  .box { background: white; padding: 16px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 4px #0001; }
+  input, select { padding: 7px 10px; margin: 4px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
+  button { background: #B5181B; color: white; padding: 8px 18px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; margin: 4px; }
+  button.secondary { background: #555; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #333; color: white; padding: 8px; }
+  td { border: 1px solid #ddd; padding: 7px 10px; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .break-row td { background: #e8f5e9; color: #555; font-style: italic; text-align: center; }
+  .tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 12px; margin: 1px; }
+  .tag-math    { background:#dbeafe; color:#1e3a8a; }
+  .tag-english { background:#d1fae5; color:#064e3b; }
+  .tag-nepali  { background:#fce7f3; color:#831843; }
+  .tag-science { background:#fef3c7; color:#78350f; }
+  .tag-social  { background:#ede9fe; color:#3730a3; }
+  .tag-other   { background:#f3f4f6; color:#374151; }
+  .warn { background: #fff3cd; border-left: 4px solid orange; padding: 10px; border-radius: 4px; margin: 8px 0; }
+  .ok   { background: #d4edda; border-left: 4px solid green;  padding: 10px; border-radius: 4px; margin: 8px 0; }
+  #teacherList div { background: #f9f9f9; border: 1px solid #eee; padding: 8px 12px; border-radius: 6px; margin: 6px 0; display:flex; justify-content:space-between; align-items:center; }
+  .del { background: #dc3545; padding: 4px 10px; font-size: 12px; }
