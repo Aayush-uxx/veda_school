@@ -1,43 +1,58 @@
-<html>
-    <head><title>School Schedule</title></head>
-    <body>
-        <form className="form" method="POST">
-            <h3>Teacher Registration Form:</h3>
-            <label>Enter your full name :</label>
-            <input type="text" placeholder="Your Name" />
-            <br />
-            <label>Choose your subject:</label>
-            <select id="tSubject">
-              <option value="math">Math</option>
-              <option value="english">English</option>
-              <option value="nepali">Nepali</option>
-              <option value="science">Science</option>
-              <option value="social">Social</option>
-              <option value="other">Others</option>
-            </select>
-            <br />
-            <label>Select your role :</label>
-           
-            PartTime
-              <input type="radio" value="PartTime" />
-              
-    
-              FullTime
-              <input type="radio" value="FullTime" />
-              
-            
-            
-            <br />
-            <label>Select your class : </label>
-            <select id="tGrade">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <input type="button" placeholder="Add Teacher"/>
-            <input type="button" placeholder="Generate Schedule"/>
-          </form>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Teacher Scheduler - Prototype</title>
+</head>
+<body>
+<h1> Teacher Scheduler — Prototype</h1>
+
+<!-- STEP 1: ADD TEACHERS -->
+<div class="box">
+  <h2>Step 1: Add Teachers</h2>
+  <div>
+    <input id="tName" placeholder="Teacher Name" style="width:180px"/>
+    <select id="tSubject">
+      <option value="math">Mathematics</option>
+      <option value="english">English</option>
+      <option value="nepali">Nepali</option>
+      <option value="science">Science</option>
+      <option value="social">Social Studies</option>
+      <option value="other">Other</option>
+    </select>
+    <select id="tType">
+      <option value="full">Full Time (all days)</option>
+      <option value="part">Part Time (3 days/week)</option>
+      <option value="alternate">Alternate days</option>
+    </select>
+    <input id="tMax" type="number" value="5" min="1" max="7" style="width:60px" title="Max periods/day"/>
+    <button onclick="addTeacher()">+ Add Teacher</button>
+  </div>
+  <div id="teacherList" style="margin-top:12px;"></div>
+</div>
+
+<!-- STEP 2: GENERATE -->
+<div class="box">
+  <h2>Step 2: Generate Schedule</h2>
+  <button onclick="generate()" style="font-size:15px; padding:10px 28px;">⚡ Generate Timetable</button>
+  <div id="genMsg"></div>
+</div>
+
+<!-- STEP 3: VIEW -->
+<div class="box" id="viewBox" style="display:none">
+  <h2>Step 3: Timetable</h2>
+  <label>View for class:
+    <select id="classSelect" onchange="renderTable()">
+      <option value="Grade 1">Grade 1</option>
+      <option value="Grade 2">Grade 2</option>
+      <option value="Grade 3">Grade 3</option>
+      <option value="Grade 4">Grade 4</option>
+      <option value="Grade 5">Grade 5</option>
+    </select>
+  </label>
+  <button class="secondary" onclick="window.print()" style="margin-left:10px;">🖨 Print</button>
+  <div id="tableOut" style="margin-top:14px;overflow-x:auto;"></div>
+</div>
+<script src="./script'.js"></script>
+</body>
 </html>
