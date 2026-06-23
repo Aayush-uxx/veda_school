@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Teacher Scheduler</title> <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <h1>Teacher Scheduler</h1>
+  <div>
+    <h2>Add Teachers</h2>
+    <form id="teacherForm">
+      <input id="tName" placeholder="Teacher Name" type="text" required/>
+      <select id="tSubject" required>
+        <option value="">Select Subject</option>
+        <option value="Math">Math</option>
+        <option value="English">English</option>
+        <option value="Nepali">Nepali</option>
+        <option value="Science">Science</option>
+        <option value="Social">Social Studies</option>
+      </select>
+      <select id="tGrade" required>
+        <option value="">Select Grade</option>
+        <option value="Grade 1">Grade 1</option>
+        <option value="Grade 2">Grade 2</option>
+        <option value="Grade 3">Grade 3</option>
+        <option value="Grade 4">Grade 4</option>
+        <option value="Grade 5">Grade 5</option>
+      </select>
+      <button type="button" onclick="addTeacher()">Add Teacher</button>
+    </form>
+    <div id="error" ></div>
+  </div>
+  <hr/>
+  <div>
+    <h2>Teacher List</h2>
+    <div id="teacherList"></div>
+  </div>
+  <hr/>
+  <div>
+    <h2>Generate Timetable</h2>
+    <label for="gradeSelect">Select Grade:</label>
+    <select id="gradeSelect">
+      <option value="">Select Grade</option>
+      <option value="Grade 1">Grade 1</option>
+      <option value="Grade 2">Grade 2</option>
+      <option value="Grade 3">Grade 3</option>
+      <option value="Grade 4">Grade 4</option>
+      <option value="Grade 5">Grade 5</option>
+    </select>
+    <button type="button" onclick="generate()">Generate Timetable</button>
+  </div>
+  <div id="genMsg"></div>
+  <script src="./script.js"></script>
+</body>
+</html>

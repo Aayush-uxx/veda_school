@@ -1,0 +1,39 @@
+body{
+  margin : 20px auto;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  max-width: 700px;
+}
+h1,h2{
+  background: rgb(61, 61, 207);
+  color : white;
+}
+input,select{
+  padding: 6px;
+  margin: 3px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+button{
+  padding: 8px;
+  margin: 3px;
+  cursor: pointer;
+  background: rgb(209, 50, 50);
+  color:white;
+}
+table{
+  background: white;
+  color:black;
+  padding: 15px;
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th{
+  background:rgb(100, 146, 138);
+  color:white;
+  border:1px solid black;
+}
+td{
+  border:2px solid black;
+}
