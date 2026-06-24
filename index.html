@@ -3,405 +3,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Teacher Scheduler - Prototype</title>
+  <title>Teacher Scheduler</title>
   <link rel="stylesheet" href="./style.css"/>
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
-}
-
-:root{
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.15);
-    --text: #ffffff;
-    --text-soft: rgba(255,255,255,.75);
-    --accent: #0a84ff;
-    --success: #30d158;
-}
-
-body{
-    min-height:100vh;
-    padding:40px;
-    color:var(--text);
-
-    background:
-    radial-gradient(circle at top left,#3b82f6 0%,transparent 30%),
-    radial-gradient(circle at top right,#9333ea 0%,transparent 30%),
-    radial-gradient(circle at bottom,#0ea5e9 0%,transparent 30%),
-    #0f172a;
-
-    background-attachment:fixed;
-}
-
-/* floating glow */
-body::before{
-    content:"";
-    position:fixed;
-    width:500px;
-    height:500px;
-    top:-150px;
-    left:-100px;
-    background:#0a84ff55;
-    filter:blur(150px);
-    pointer-events:none;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    width:500px;
-    height:500px;
-    bottom:-150px;
-    right:-100px;
-    background:#9333ea55;
-    filter:blur(150px);
-    pointer-events:none;
-}
-
-h1{
-    text-align:center;
-    margin-bottom:30px;
-    font-size:42px;
-    font-weight:700;
-    letter-spacing:-1px;
-
-    background:linear-gradient(
-        90deg,
-        #ffffff,
-        #90cdf4,
-        #ffffff
-    );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-h2{
-    margin-bottom:18px;
-    font-size:22px;
-    font-weight:600;
-}
-
-/* =========================
-   GLASS CARD
-========================= */
-
-.box{
-    max-width:1200px;
-    margin:0 auto 25px auto;
-
-    background:var(--glass-bg);
-
-    backdrop-filter:blur(24px);
-    -webkit-backdrop-filter:blur(24px);
-
-    border:1px solid var(--glass-border);
-
-    border-radius:28px;
-
-    padding:28px;
-
-    box-shadow:
-        0 8px 32px rgba(0,0,0,.25),
-        inset 0 1px 0 rgba(255,255,255,.15);
-
-    transition:.35s ease;
-}
-
-.box:hover{
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 20px 40px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.2);
-}
-
-/* =========================
-   INPUTS
-========================= */
-
-input,
-select{
-    background:rgba(255,255,255,.08);
-    color:white;
-
-    border:1px solid rgba(255,255,255,.15);
-
-    border-radius:14px;
-
-    padding:12px 14px;
-    margin:6px;
-
-    font-size:15px;
-
-    outline:none;
-
-    transition:.25s;
-}
-
-input::placeholder{
-    color:rgba(255,255,255,.55);
-}
-
-input:focus,
-select:focus{
-    border-color:#0a84ff;
-
-    box-shadow:
-    0 0 0 4px rgba(10,132,255,.2);
-}
-
-/* dropdown options */
-option{
-    background:#1e293b;
-    color:white;
-}
-
-/* =========================
-   CHECKBOXES
-========================= */
-
-label{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    margin:6px 12px 6px 0;
-    color:var(--text-soft);
-}
-
-input[type="checkbox"]{
-    accent-color:#0a84ff;
-    width:18px;
-    height:18px;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-button{
-    border:none;
-
-    border-radius:16px;
-
-    padding:12px 22px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #0a84ff,
-        #5ac8fa
-    );
-
-    color:white;
-
-    font-weight:600;
-    font-size:14px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:
-        0 10px 25px rgba(10,132,255,.35);
-}
-
-button:hover{
-    transform:translateY(-2px) scale(1.02);
-
-    box-shadow:
-        0 15px 35px rgba(10,132,255,.45);
-}
-
-button:active{
-    transform:scale(.97);
-}
-
-/* =========================
-   TEACHER LIST
-========================= */
-
-#teacherList{
-    display:grid;
-    gap:12px;
-}
-
-.teacher-card{
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    border-radius:18px;
-
-    padding:14px;
-}
-
-/* =========================
-   TABLE
-========================= */
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    overflow:hidden;
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,.05);
-}
-
-th{
-    background:rgba(255,255,255,.12);
-
-    color:white;
-
-    padding:16px;
-
-    font-weight:600;
-}
-
-td{
-    padding:14px;
-    text-align:center;
-
-    border-top:
-    1px solid rgba(255,255,255,.08);
-}
-
-tr:hover td{
-    background:rgba(255,255,255,.04);
-}
-
-/* =========================
-   MESSAGES
-========================= */
-
-.warn{
-    margin-top:12px;
-
-    padding:12px 16px;
-
-    border-radius:14px;
-
-    background:
-    rgba(255,59,48,.15);
-
-    border:
-    1px solid rgba(255,59,48,.35);
-
-    color:#ffb4ad;
-}
-
-.success{
-    margin-top:12px;
-
-    padding:12px 16px;
-
-    border-radius:14px;
-
-    background:
-    rgba(48,209,88,.15);
-
-    border:
-    1px solid rgba(48,209,88,.35);
-
-    color:#8df0a8;
-}
-
-/* =========================
-   AVAILABLE TEACHERS
-========================= */
-
-#availableOut{
-    display:grid;
-    gap:10px;
-}
-
-.available-card{
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    border-radius:16px;
-
-    padding:12px;
-}
-
-/* =========================
-   SCROLLBAR
-========================= */
-
-::-webkit-scrollbar{
-    width:10px;
-    height:10px;
-}
-
-::-webkit-scrollbar-track{
-    background:transparent;
-}
-
-::-webkit-scrollbar-thumb{
-    background:rgba(255,255,255,.2);
-    border-radius:50px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:rgba(255,255,255,.35);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:768px){
-
-    body{
-        padding:18px;
-    }
-
-    h1{
-        font-size:28px;
-    }
-
-    .box{
-        padding:20px;
-        border-radius:22px;
-    }
-
-    input,
-    select,
-    button{
-        width:100%;
-        margin:6px 0;
-    }
-
-    label{
-        display:flex;
-        margin:8px 0;
-    }
-}
-  </style> -->
 </head>
 <body>
 
-<div style="display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto 20px auto; flex-wrap: wrap; gap: 10px;">
-    <h1 style="margin-bottom: 0;">Teacher Scheduler — Prototype</h1>
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="color: rgba(0, 0, 0, 0.6); font-size: 14px;">Toggle</span>
-        <label class="toggle-switch">
-            <input type="checkbox" id="wideModeToggle" onchange="toggleWideMode()">
-            <span class="slider"></span>
-        </label>
-    </div>
+<div style="display: flex; justify-content: center; align-items: center; max-width: 1400px; margin: 0 auto 20px auto; flex-wrap: wrap; gap: 10px;">
+    <h1 style="margin-bottom: 0;">Teacher Scheduler</h1>
 </div>
+
 <div class="app-container"></div>
+
 <div class="box">
-  <h2>Step 1: Add Teachers</h2>
+  <h2>Add Teachers</h2>
 
   <div>
     <input id="tName" placeholder="Teacher Name" style="width:180px"/>
@@ -423,62 +37,143 @@ tr:hover td{
   </div>
 
   <div style="margin-top:10px;">
+    <strong>Assign to Grade</strong><br>
+    <select id="tGrade">
+      <option value="Grade 1-A">Grade 1-A</option>
+      <option value="Grade 1-B">Grade 1-B</option>
+      <option value="Grade 2-A">Grade 2-A</option>
+      <option value="Grade 2-B">Grade 2-B</option>
+      <option value="Grade 3-A">Grade 3-A</option>
+      <option value="Grade 3-B">Grade 3-B</option>
+      <option value="Grade 4-A">Grade 4-A</option>
+      <option value="Grade 4-B">Grade 4-B</option>
+      <option value="Grade 5-A">Grade 5-A</option>
+      <option value="Grade 5-B">Grade 5-B</option>
+    </select>
+  </div>
+
+  <div style="margin-top:10px;">
     <strong>Available Days</strong> <small>(pick at least 3)</small><br>
-    <label><input type="checkbox" id="day-Sunday"/>    Sunday</label>
-    <label><input type="checkbox" id="day-Monday"/>    Monday</label>
-    <label><input type="checkbox" id="day-Tuesday"/>   Tuesday</label>
+    <label><input type="checkbox" id="day-Sunday"/> Sunday</label>
+    <label><input type="checkbox" id="day-Monday"/> Monday</label>
+    <label><input type="checkbox" id="day-Tuesday"/> Tuesday</label>
     <label><input type="checkbox" id="day-Wednesday"/> Wednesday</label>
-    <label><input type="checkbox" id="day-Thursday"/>  Thursday</label>
-    <label><input type="checkbox" id="day-Friday"/>    Friday</label>
+    <label><input type="checkbox" id="day-Thursday"/> Thursday</label>
+    <label><input type="checkbox" id="day-Friday"/> Friday</label>
   </div>
 
   <div style="margin-top:10px;">
     <strong>Available Periods</strong> <small>(pick at least 3, at most 5)</small><br>
-    <label><input type="checkbox" id="period-1"/>  Period 1 (10:00–10:45)</label>
-    <label><input type="checkbox" id="period-2"/>  Period 2 (10:45–11:30)</label>
-    <label><input type="checkbox" id="period-4"/>  Period 3 (11:45–12:30)</label>
-    <label><input type="checkbox" id="period-5"/>  Period 4 (12:30–1:15)</label>
-    <label><input type="checkbox" id="period-7"/>  Period 5 (2:00–2:45)</label>
-    <label><input type="checkbox" id="period-8"/>  Period 6 (2:45–3:30)</label>
+    <label><input type="checkbox" id="period-1"/> Period 1 (10:00–10:45)</label>
+    <label><input type="checkbox" id="period-2"/> Period 2 (10:45–11:30)</label>
+    <label><input type="checkbox" id="period-4"/> Period 3 (11:45–12:30)</label>
+    <label><input type="checkbox" id="period-5"/> Period 4 (12:30–1:15)</label>
+    <label><input type="checkbox" id="period-7"/> Period 5 (2:00–2:45)</label>
+    <label><input type="checkbox" id="period-8"/> Period 6 (2:45–3:30)</label>
     <label><input type="checkbox" id="period-10"/> Period 7 (3:45–4:30)</label>
   </div>
 
   <div style="margin-top:10px;">
-    <button onclick="addTeacher()">+ Add Teacher</button>
+    <button onclick="addTeacher()">Add Teacher</button>
   </div>
 
   <div id="teacherList" style="margin-top:12px;"></div>
 </div>
 
 <div class="box">
-  <h2>Step 2: Generate Schedule</h2>
+  <h2>Generate Schedule</h2>
   <button onclick="generate()" style="font-size:15px; padding:10px 28px;">Generate Timetable</button>
   <div id="genMsg"></div>
 </div>
 
 <div class="box" id="viewBox" style="display:none">
-  <h2>Step 3: Timetable</h2>
-  <label>View for class:
+  <h2>View Timetable</h2>
+  <label>Class:
     <select id="classSelect" onchange="renderTable()">
-      <option value="Grade 1">Grade 1</option>
-      <option value="Grade 2">Grade 2</option>
-      <option value="Grade 3">Grade 3</option>
-      <option value="Grade 4">Grade 4</option>
-      <option value="Grade 5">Grade 5</option>
+      <option value="Grade 1-A">Grade 1-A</option>
+      <option value="Grade 1-B">Grade 1-B</option>
+      <option value="Grade 2-A">Grade 2-A</option>
+      <option value="Grade 2-B">Grade 2-B</option>
+      <option value="Grade 3-A">Grade 3-A</option>
+      <option value="Grade 3-B">Grade 3-B</option>
+      <option value="Grade 4-A">Grade 4-A</option>
+      <option value="Grade 4-B">Grade 4-B</option>
+      <option value="Grade 5-A">Grade 5-A</option>
+      <option value="Grade 5-B">Grade 5-B</option>
     </select>
   </label>
   <button onclick="window.print()" style="margin-left:10px;">Print</button>
   <div id="tableOut" style="margin-top:14px;overflow-x:auto;"></div>
 </div>
+
 <div class="box">
-    <h2>Check Available Teachers</h2>
+    <h2>Combined Schedule</h2>
+    <p><small>Select grades to view together:</small></p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0;">
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 1-A" onchange="toggleGrade('Grade 1-A')"> Grade 1-A
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 1-B" onchange="toggleGrade('Grade 1-B')"> Grade 1-B
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 2-A" onchange="toggleGrade('Grade 2-A')"> Grade 2-A
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 2-B" onchange="toggleGrade('Grade 2-B')"> Grade 2-B
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 3-A" onchange="toggleGrade('Grade 3-A')"> Grade 3-A
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 3-B" onchange="toggleGrade('Grade 3-B')"> Grade 3-B
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 4-A" onchange="toggleGrade('Grade 4-A')"> Grade 4-A
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 4-B" onchange="toggleGrade('Grade 4-B')"> Grade 4-B
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 5-A" onchange="toggleGrade('Grade 5-A')"> Grade 5-A
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.05); padding: 5px 10px; border-radius: 5px;">
+            <input type="checkbox" class="grade-checkbox" value="Grade 5-B" onchange="toggleGrade('Grade 5-B')"> Grade 5-B
+        </label>
+        <button onclick="selectAllGrades()" style="padding: 5px 15px; font-size: 13px;">Select All</button>
+    </div>
+    
+    <div id="cumulativeOut" style="margin-top: 15px;"></div>
+</div>
+
+<div class="box">
+    <h2>Export</h2>
+    <button onclick="exportToExcel()" style="background: #217346; padding: 10px 20px;">
+        Export to Excel
+    </button>
+    <button onclick="window.print()" style="background: #0a84ff; padding: 10px 20px; margin-left: 10px;">
+        Print Schedule
+    </button>
+    <div style="margin-top: 10px; font-size: 13px; color: #666;">
+        <small>Select grades above before exporting to include only selected grades.</small>
+    </div>
+</div>
+
+<div class="box">
+    <h2>Available Teachers</h2>
 
     <select id="gradeSelect">
-        <option value="Grade 1">Grade 1</option>
-        <option value="Grade 2">Grade 2</option>
-        <option value="Grade 3">Grade 3</option>
-        <option value="Grade 4">Grade 4</option>
-        <option value="Grade 5">Grade 5</option>
+        <option value="Grade 1-A">Grade 1-A</option>
+        <option value="Grade 1-B">Grade 1-B</option>
+        <option value="Grade 2-A">Grade 2-A</option>
+        <option value="Grade 2-B">Grade 2-B</option>
+        <option value="Grade 3-A">Grade 3-A</option>
+        <option value="Grade 3-B">Grade 3-B</option>
+        <option value="Grade 4-A">Grade 4-A</option>
+        <option value="Grade 4-B">Grade 4-B</option>
+        <option value="Grade 5-A">Grade 5-A</option>
+        <option value="Grade 5-B">Grade 5-B</option>
     </select>
 
     <select id="daySelect">
@@ -494,32 +189,36 @@ tr:hover td{
 
     <div id="availableOut" style="margin-top:12px;"></div>
 </div>
+
+<div style="text-align: center; margin: 20px 0;">
+    <button onclick="clearAllData()" style="background: #dc3545; padding: 10px 30px;">
+        Clear Saved Data
+    </button>
 </div>
-<button onclick="clearAllData()">
-    Clear Saved Data
-</button>
-<!-- <button onclick="addFakeData()">Load Sample Data</button> -->
+
 <script>
     function clearAllData() {
-    if (!confirm('Delete all saved data?')) {
-        return;
+        if (!confirm('Delete all saved data?')) {
+            return;
+        }
+
+        localStorage.removeItem('teachers');
+        localStorage.removeItem('schedule');
+
+        teachers = [];
+        schedule = null;
+
+        renderTeachers();
+
+        document.getElementById('tableOut').innerHTML = '';
+        document.getElementById('availableOut').innerHTML = '';
+        document.getElementById('genMsg').innerHTML = '';
+        document.getElementById('cumulativeOut').innerHTML = '';
+
+        location.reload();
     }
-
-    localStorage.removeItem('teachers');
-    localStorage.removeItem('schedule');
-
-    teachers = [];
-    schedule = null;
-
-    renderTeachers();
-
-    document.getElementById('tableOut').innerHTML = '';
-    document.getElementById('availableOut').innerHTML = '';
-    document.getElementById('genMsg').innerHTML = '';
-
-    location.reload();
-}
 </script>
+
 <script src="./script.js"></script>
 </body>
 </html>
