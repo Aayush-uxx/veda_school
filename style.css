@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 20px auto;
     padding: 10px;
     background: #f5f5f5;
@@ -24,12 +24,14 @@ h2 {
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 input, select {
     padding: 6px;
     margin: 3px;
     border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 button {
@@ -39,10 +41,11 @@ button {
     border: none;
     margin: 3px;
     cursor: pointer;
+    border-radius: 3px;
 }
 
-button.secondary {
-    background: gray;
+button:hover {
+    background: #8a1215;
 }
 
 table {
@@ -72,11 +75,6 @@ tr:nth-child(even) td {
     font-style: italic;
 }
 
-.tag {
-    padding: 2px 5px;
-    font-size: 12px;
-}
-
 .warn {
     background: #fff3cd;
     padding: 8px;
@@ -104,78 +102,19 @@ tr:nth-child(even) td {
     padding: 3px 8px;
     border: none;
 }
-/* // Toggle Switch Styles */
-/* Toggle Switch */
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-}
-
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(17, 209, 227, 0.819);
-    transition: .3s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 4px;
-    background: rgb(1, 1, 1);
-    transition: .3s;
-    border-radius: 50%;
-}
-
-.toggle-switch input:checked + .slider {
-    background: #0a84ff;
-}
-
-.toggle-switch input:checked + .slider:before {
-    transform: translateX(24px);
-}
-
-body.wide-mode {
-    padding: 20px 40px;
-    max-width: 100%;
-}
-
-body.wide-mode .box {
-    max-width: 100%;
-    width: 100%;
-}
-
-body.wide-mode .app-container {
-    max-width: 100%;
-}
-
-body.wide-mode table {
-    font-size: 13px;
-}
-
-body.wide-mode table td,
-body.wide-mode table th {
-    padding: 10px 8px;
-}
 
 @media(max-width: 768px) {
-    body.wide-mode {
-        padding: 10px 15px;
+    body {
+        padding: 10px;
+    }
+    
+    input, select, button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    label {
+        display: block;
+        margin: 5px 0;
     }
 }
